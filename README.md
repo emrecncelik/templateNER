@@ -4,9 +4,17 @@ Source Code For
 
 # Training
 
-Training ```train.py```
+## 1 Convert your BIO file to Template format 
+```python FromBIO2Template.py MyBIOFile.csv> MyTempFile.csv```
 
-Inference ```inference.py```
+
+## 2 Training
+Change the necessary part in  ```Template NER Training.ipynb```
+and train your model
+
+## 3 Inference
+Change accordingly and run Inference ```InferenceCode.ipynb```
+
 
 # Corpus
 
