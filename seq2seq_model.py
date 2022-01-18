@@ -41,7 +41,7 @@ from transformers import (
     RobertaTokenizer,
     MBartConfig,
     MBartForConditionalGeneration,
-    MBartTokenizer,
+    MBartTokenizerFast,
     EncoderDecoderModel,
     get_linear_schedule_with_warmup,
 )
@@ -65,7 +65,7 @@ MODEL_CLASSES = {
     "bart": (BartConfig, BartForConditionalGeneration, BartTokenizer),
     "bert": (BertConfig, BertModel, BertTokenizer),
     "roberta": (RobertaConfig, RobertaModel, RobertaTokenizer),
-    "mbart": (MBartConfig, MBartForConditionalGeneration, MBartTokenizer)
+    "mbart": (MBartConfig, MBartForConditionalGeneration, MBartTokenizerFast)
     # "blender": (BlenderbotSmallConfig, BlenderbotSmallForConditionalGeneration, BlenderbotSmallTokenizer),
     # "blender-large": (BlenderbotConfig, BlenderbotForConditionalGeneration, BlenderbotTokenizer)
 }
@@ -178,7 +178,8 @@ class Seq2SeqModel:
             elif encoder_decoder_type == "mbart":
                 self.model = model_class.from_pretrained(encoder_decoder_name)
                 self.encoder_tokenizer = tokenizer_class.from_pretrained(encoder_decoder_name, src_lang="tr_TR", tgt_lang="tr_TR")
-
+            self.model.config.use_cache = False
+            self.model.gradient_checkpointing_enable()
             self.decoder_tokenizer = self.encoder_tokenizer
             self.config = self.model.config
         else:
