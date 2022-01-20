@@ -34,7 +34,9 @@ preset_model_args = {
 }
 
 
-parser = argparse.ArgumentParser(prog="Template NER Trainer")
+parser = argparse.ArgumentParser(
+    description="This script trains an encoder decoder model for template based NER"
+)
 parser.add_argument(
     "input_dir",
     help="Data directory path containing train, dev, test csv files.",
@@ -43,7 +45,7 @@ parser.add_argument(
     "-o",
     "--output_dir",
     default="./outputs",
-    help="Data directory path containing train, dev, test csv files.",
+    help="Output directory for model and evaluation results.",
 )
 parser.add_argument(
     "-n",
@@ -57,8 +59,6 @@ parser.add_argument(
     default="mbart",
     help="Type of the HF model to train. Available options are 'mbart' and 'bart'",
 )
-parser.add_argument("--max_train_size", type=int, default=None)
-parser.add_argument("--max_eval_size", type=int, default=None)
 parser.add_argument("-s", "--manual_seed", type=int, default=7)
 parser.add_argument("-e", "--num_train_epochs", type=int, default=3)
 parser.add_argument("-b", "--train_batch_size", type=int, default=32)
@@ -67,6 +67,8 @@ parser.add_argument("-w", "--wandb_project", type=str, default="template-ner")
 parser.add_argument("-g", "--gradient_checkpointing", action="store_true")
 parser.add_argument("-p", "--sep", default=";")
 parser.add_argument("-v", "--log_level", default="i")
+parser.add_argument("--max_train_size", type=int, default=None)
+parser.add_argument("--max_eval_size", type=int, default=None)
 
 
 def read_data(
