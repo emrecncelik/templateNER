@@ -14,7 +14,7 @@ and train your model
 
 ## 3 Inference
 Change accordingly and run Inference ```InferenceCode.ipynb```
-You need to convert your test data into JSONL format. Use FromBIO2JSONL.py for it!
+You need to convert your test data in BIO format into JSONL format. Use FromBIO2JSONL.py for it!
 
 
 # Corpus
