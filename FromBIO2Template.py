@@ -12,7 +12,7 @@ else:
 PATTERN='"%s";%s is a %s entity.'
 for line in open(INFILE):
     line=line.replace(';','')
-    if len(line.strip())>0:
+    if len(line.strip().split())>1:
         token, label=line.split()
         token=token.replace('"','')
         token=token.replace("'","")
